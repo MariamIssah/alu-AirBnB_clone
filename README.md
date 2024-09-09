@@ -3,7 +3,11 @@
 
 # Description of the project
 
-This project is a basic replica of the Airbnb website. The initial phase focuses on developing a backend interface or console for managing application data, similar to a shell. Through console commands, users can create, update, delete objects, and handle file storage. 
+This project aims to create a fundamental replica of the Airbnb website, focusing on building the core backend infrastructure that powers the application. In this initial phase, we are developing a command-line interface (CLI) or console as the backend interface for managing various application data aspects.
+Shell or terminal, this console allows users to interact with the system through text-based commands. It is designed to handle essential operations such as creating, reading, updating, and deleting instances of various objects, including users, places, amenities, and reviews.
+Moreover, the console includes functionality for persisting data across sessions through file storage. This means that all created objects can be saved to a file and reloaded later, ensuring that the application's state is maintained even after the program exits. This console serves as the foundation upon which more complex features and interfaces, such as the web front-end and database integration, will be built in later phases of the project.
+In all, this project shows the groundwork for a fully functional web application by providing a robust backend system capable of managing the core data and operations that will be essential to the eventual Airbnb clone.
+
 
 # The console - tasks
 -  Put in place a parent class (called BaseModel) to take care of the initialization, serialization and deserialization of  future instances <br>
