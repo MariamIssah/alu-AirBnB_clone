@@ -26,8 +26,3 @@ class User(BaseModel):
         Initialize public instance attributes.
         """
         super().__init__(*args, **kwargs)
-
-        # self.email = User.email
-        # self.password = User.password
-        # self.first_name = User.first_name
-        # self.last_name = User.last_name
