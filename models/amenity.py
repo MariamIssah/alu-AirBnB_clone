@@ -1,4 +1,6 @@
-s module contains Amenity class (Blueprint for creating Amenity objects).
+#!/usr/bin/python3
+"""
+This module contains Amenity class (Blueprint for creating Amenity objects).
 """
 
 from models.base_model import BaseModel
@@ -15,4 +17,3 @@ class Amenity(BaseModel):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # self.name = Amenity.name
