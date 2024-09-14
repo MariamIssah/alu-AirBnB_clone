@@ -14,11 +14,7 @@ from models.review import Review
 storage = FileStorage()
 storage.reload()
 loaded_objects = storage.all()
-# for key, value in loaded_objects.items():
-#     if key in storage.models:
-#         continue
-#     class_name = value["__class__"]
-#     del value("__class__")
+
 classes = {
     "BaseModel": BaseModel,
     "User": User,
