@@ -18,8 +18,8 @@ class BaseModel:
         # initialize if nothing is passed
         if kwargs == {}:
             self.id = str(uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            self.created_at = datetime.utcnow()
+            self.updated_at = datetime.utcnow()
             models.storage.new(self)
             return
 
@@ -47,7 +47,7 @@ class BaseModel:
 
     def save(self):
         """updates last updated variable"""
-        self.updated_at = datetime.now()
+        self.updated_at = datetime.utcnow()
         models.storage.save()
 
     def to_dict(self):
