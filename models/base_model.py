@@ -5,11 +5,7 @@ serve as the base class for all our models."""
 
 from uuid import uuid4
 from datetime import datetime
-from models.engine.file_storage import FileStorage
-
-storage = FileStorage()
-storage.reload()
-loaded_objects = storage.all()
+import models
 
 class BaseModel:
     """Base class for all our classes"""
@@ -23,7 +19,7 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.utcnow()
             self.updated_at = datetime.utcnow()
-            storage.new(self)
+            models.storage.new(self)
             return
 
         # using key words (deserialize)
@@ -51,7 +47,7 @@ class BaseModel:
     def save(self):
         """updates last updated variable"""
         self.updated_at = datetime.utcnow()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """Returns a dictionary representation of self"""
@@ -64,12 +60,12 @@ class BaseModel:
     @classmethod
     def all(cls):
         """Retrieve all current instances of cls"""
-        return storage.find_all(cls.__name__)
+        return models.storage.find_all(cls.__name__)
 
     @classmethod
     def count(cls):
         """Get the number of all current instances of cls"""
-        return len(storage.find_all(cls.__name__))
+        return len(models.storage.find_all(cls.__name__))
 
     @classmethod
     def create(cls, *args, **kwargs):
@@ -80,7 +76,7 @@ class BaseModel:
     @classmethod
     def show(cls, instance_id):
         """Retrieve an instance"""
-        return storage.find_by_id(
+        return models.storage.find_by_id(
             cls.__name__,
             instance_id
         )
@@ -88,7 +84,7 @@ class BaseModel:
     @classmethod
     def destroy(cls, instance_id):
         """Deletes an instance"""
-        return storage.delete_by_id(
+        return models.storage.delete_by_id(
             cls.__name__,
             instance_id
         )
@@ -108,8 +104,9 @@ class BaseModel:
         else:
             args = [args[:2]]
         for arg in args:
-            storage.update_one(
+            models.storage.update_one(
                 cls.__name__,
                 instance_id,
                 *arg
             )
+
