@@ -34,7 +34,7 @@ class BaseModel:
         """
         Updates the file storage with the new/updated information.
         """
-        self.updated_at = datetime.now()
+        self.updated_at = datetime.utcnow()
         models.storage.save()
 
     def to_dict(self):
