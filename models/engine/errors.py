@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-
-
 """
 Defines the custome errors used in File Storage
 """
