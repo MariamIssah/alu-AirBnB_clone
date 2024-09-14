@@ -2,13 +2,13 @@
 """
 This module serves as the initialization file for the models package.
 """
-from base_model import BaseModel
-from user import User
-from state import State
-from city import City
-from amenity import Amenity
-from place import Place
-from review import Review
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 classes = {
