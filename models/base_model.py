@@ -6,6 +6,7 @@ serve as the base class for all our models."""
 from uuid import uuid4
 from datetime import datetime
 import models
+from models import storage as models_storage
 
 
 class BaseModel:
