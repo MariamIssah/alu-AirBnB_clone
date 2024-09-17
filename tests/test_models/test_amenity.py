@@ -1,40 +1,5 @@
 #!/usr/bin/python3
 """
-Module documentation
-"""
-
-import unittest
-from models.base_model import BaseModel
-from models.amenity import Amenity
-
-
-class TestAmenity(unittest.TestCase):
-    """ Test the Amenity class """
-
-    def test_instance(self):
-        """ Test instance """
-        obj = Amenity()
-        self.assertIsInstance(obj, Amenity)
-
-    def test_is_subclass(self):
-        """test the instance of sub classes"""
-        amenity = Amenity()
-        self.assertTrue(issubclass(type(amenity), BaseModel))
-
-    def test_name(self):
-        """test name"""
-        amenity = Amenity()
-        self.assertEqual(amenity.name, "")
-        amenity.name = "Wifi"
-        self.assertEqual(amenity.name, "Wifi")
-        self.assertIsNotNone(amenity.id)
-
-
-if __name__ == "__main__":
-    unittest.main()
-=======
-#!/usr/bin/python3
-"""
 Module defines unittests for models/amenity.py.
 """
 import os
@@ -168,37 +133,55 @@ class TestAmenity_save(unittest.TestCase):
 
 
 class TestAmenity_to_dict(unittest.TestCase):
-    """Un#!/usr/bin/python3
-"""
-Module documentation
-"""
+    """Unittests for testing to_dict method of the Amenity class."""
 
-import unittest
-from models.base_model import BaseModel
-from models.amenity import Amenity
+    def test_to_dict_type(self):
+        self.assertTrue(dict, type(Amenity().to_dict()))
 
+    def test_to_dict_contains_correct_keys(self):
+        am = Amenity()
+        self.assertIn("id", am.to_dict())
+        self.assertIn("created_at", am.to_dict())
+        self.assertIn("updated_at", am.to_dict())
+        self.assertIn("__class__", am.to_dict())
 
-class TestAmenity(unittest.TestCase):
-    """ Test the Amenity class """
+    def test_to_dict_contains_added_attributes(self):
+        am = Amenity()
+        am.middle_name = "Holberton"
+        am.my_number = 98
+        self.assertEqual("Holberton", am.middle_name)
+        self.assertIn("my_number", am.to_dict())
 
-    def test_instance(self):
-        """ Test instance """
-        obj = Amenity()
-        self.assertIsInstance(obj, Amenity)
+    def test_to_dict_datetime_attributes_are_strs(self):
+        am = Amenity()
+        am_dict = am.to_dict()
+        self.assertEqual(str, type(am_dict["id"]))
+        self.assertEqual(str, type(am_dict["created_at"]))
+        self.assertEqual(str, type(am_dict["updated_at"]))
 
-    def test_is_subclass(self):
-        """test the instance of sub classes"""
-        amenity = Amenity()
-        self.assertTrue(issubclass(type(amenity), BaseModel))
+    def test_to_dict_output(self):
+        dt = datetime.today()
+        am = Amenity()
+        am.id = "123456"
+        am.created_at = am.updated_at = dt
+        tdict = {
+            'id': '123456',
+            '__class__': 'Amenity',
+            'created_at': dt.isoformat(),
+            'updated_at': dt.isoformat(),
+        }
+        self.assertDictEqual(am.to_dict(), tdict)
 
-    def test_name(self):
-        """test name"""
-        amenity = Amenity()
-        self.assertEqual(amenity.name, "")
-        amenity.name = "Wifi"
-        self.assertEqual(amenity.name, "Wifi")
-        self.assertIsNotNone(amenity.id)
+    def test_contrast_to_dict_dunder_dict(self):
+        am = Amenity()
+        self.assertNotEqual(am.to_dict(), am.__dict__)
+
+    def test_to_dict_with_arg(self):
+        am = Amenity()
+        with self.assertRaises(TypeError):
+            am.to_dict(None)
 
 
 if __name__ == "__main__":
     unittest.main()
+    

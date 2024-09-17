@@ -62,7 +62,7 @@ class TestBaseModelClass(unittest.TestCase):
         a = obj.updated_at
         obj.save()
         b = obj.updated_at
-        self.assertNotEqual(a, b)
+        self.assertNotEqual(a,b)
 
     def test_to_dict(self):
         """ Tests to_dict method """
